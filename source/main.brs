@@ -9,10 +9,12 @@ Function main() as Void 'Optional entrypoint so screensaver can be run as a chan
     screen.setMessagePort(m.port)
     
     m.global = screen.getGlobalNode()
-'    m.global.AddField("MyField", "int", true) '(Global) Sets off message to change picture in XML
-'    m.global.MyField = 0
+    m.global.AddField("MyField", "int", true) '(Global) Sets off message to change picture in XML
+    m.global.MyField = 0
 '    m.global.AddField("channels","stringarray",true) '(Global) array of channel paths to artwork 
 '    m.global.channels = GetChannels(screen, ipaddr)
+    m.global.AddField("vendors","stringarray",true) '(Global) array of channel paths to artwork 
+    m.global.vendors = GetVendors()
     
     scene = screen.createScene("OptimalScreensaver") 'Create Scene called OptimalScreensaver
     screen.Show()
@@ -24,8 +26,8 @@ Function main() as Void 'Optional entrypoint so screensaver can be run as a chan
             if msgType = "roSGScreenEvent"
                 if msg.isScreenClosed() then return
             end if
-'        else
-'            m.global.MyField = m.global.MyField + 1
+        else
+            m.global.MyField = m.global.MyField + 1
         end if
     end while
     
@@ -79,4 +81,17 @@ Function GetChannels(screen as object, ipaddr as String) as object 'Retrives art
         end for
     endif
     return channels
+End Function
+
+Function GetVendors() as object 'Retrives artwork of home screen channels and returns an array with all artwork
+    vendors = []
+    vendors.push("pkg:/images/vendors/Bio-Botanical.png")
+    vendors.push("pkg:/images/vendors/DFH_logo.png")
+    vendors.push("pkg:/images/vendors/douglaslabs.jpg")
+    vendors.push("pkg:/images/vendors/Elixinol-logo.jpg")
+    vendors.push("pkg:/images/vendors/nic-light-3.png")
+    vendors.push("pkg:/images/vendors/orthomolecualar.png")
+    vendors.push("pkg:/images/vendors/rlclabs.png")
+    vendors.push("pkg:/images/vendors/xymogen.png")
+    return vendors
 End Function
